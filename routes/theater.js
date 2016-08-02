@@ -4,7 +4,7 @@ const Showtimes = require('showtimes');
 
 /* GET theater calls. */
 router.get('/list/:zipcode', (request, response, next) => {
-  const { zipcode } = request.params
+  const { zipcode } = request.params;
 
   const api = new Showtimes(zipcode, {});
 
