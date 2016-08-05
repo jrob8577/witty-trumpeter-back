@@ -9,14 +9,20 @@ const geocodeOptions = {
 }
 
 const geocodedTheaterResponse = ( response, theaters ) => ( error, result ) => {
-  const betterResults = result.map( entry => entry.value[ 0] )
+  const betterResults = result.map( entry => {
+    if( entry.value && entry.value[ 0 ] ) {
+      return entry.value[ 0]
+    } else {
+      return { latitude: 0, longitude: 0 }
+    }
+  })
 
   const geocodedTheaters = theaters.map( ( theater, index ) => {
     const coordinates = {
       lat: betterResults[ index ].latitude,
       lng: betterResults[ index ].longitude
     }
-    
+
     return Object.assign( theater, { coordinates } )
   })
 
